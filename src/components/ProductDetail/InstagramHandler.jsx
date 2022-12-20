@@ -53,7 +53,7 @@ function InstagramHandler() {
 				},
 				(response) => {
 					console.log(response);
-					resolve(response.instagram_business_account?.id);
+					resolve(response.id);
 				}
 			);
 		});
