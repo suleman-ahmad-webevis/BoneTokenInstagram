@@ -1,0 +1,32 @@
+
+@font-face {
+  font-family: Ruddy-Light;
+  src: url("./assets/font/Ruddy\ Light.otf");
+}
+@font-face {
+  font-family: Ruddy-Bold;
+  src: url("./assets/font/Ruddy-Bold.otf");
+}
+@font-face {
+  font-family: Inter-Regular;
+  src: url("./assets/interfont/Inter-Regular.ttf");
+}
+@font-face {
+  font-family: Urbanist-Regular;
+  src: url("./assets/font/Urbanist/Urbanist-Regular.ttf");
+}
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("./assets/font/Poppins-Regular.ttf");
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter-Regular;
+}
