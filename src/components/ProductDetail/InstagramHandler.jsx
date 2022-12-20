@@ -107,7 +107,7 @@ function InstagramHandler() {
 		setIsSharingPost(true);
 		const facebookPages = await getFacebookPages();
 		const instagramAccountId = await getInstagramAccountId(
-			facebookPages[0].id
+			facebookPages[1].id
 		);
 		const mediaObjectContainerId = await createMediaObjectContainer(
 			instagramAccountId
