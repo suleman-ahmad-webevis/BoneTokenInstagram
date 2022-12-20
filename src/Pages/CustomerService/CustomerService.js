@@ -25,19 +25,19 @@ import {
 import { Img } from "../../GlobalStyles";
 import DogProfileSmall from "../../assets/images/DogProfileSmall.png";
 import { FormInput, FormLabel } from "../../components/MyDogs/MyDogForm.styled";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
-import WhitePaper from "../../assets/images/WhitePaper.png";
+// import "/node_modules/flag-icons/css/flag-icons.min.css";
+// import WhitePaper from "../../assets/images/WhitePaper.png";
 //ToShowPDF
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import WhitePaperPDF from "../../assets/pdf/WhitePaper.pdf";
+// import { Viewer, Worker } from "@react-pdf-viewer/core";
+// import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+// import "@react-pdf-viewer/core/lib/styles/index.css";
+// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+// import WhitePaperPDF from "../../assets/pdf/WhitePaper.pdf";
 
 const CustomerService = () => {
-  const [defaultPdfFile] = useState(WhitePaperPDF);
-  const [showPdf, setShowPdf] = useState(false);
-  const defLayoutPlugin = defaultLayoutPlugin();
+  // const [defaultPdfFile] = useState(WhitePaperPDF);
+  // const [showPdf, setShowPdf] = useState(false);
+  // const defLayoutPlugin = defaultLayoutPlugin();
 
   return (
     <CSPage>
@@ -60,11 +60,11 @@ const CustomerService = () => {
             <Heading level={1}>Disclaimer</Heading>
             <Heading level={1}>Privacy</Heading>
             <Heading level={1}>Terms and Conditions</Heading>
-            <Img
+            {/* <Img
               src={WhitePaper}
               alt="WhitePaper"
               onClick={() => setShowPdf(!showPdf)}
-            />
+            /> */}
           </CSPolicy>
         </CSLeft>
         {/* Right Section */}
@@ -113,11 +113,11 @@ const CustomerService = () => {
           </ShippingCostContainer>
         </CSRight>
       </CSContainer>
-      {showPdf && (
+      {/* {showPdf && (
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
           <Viewer fileUrl={defaultPdfFile} plugins={[defLayoutPlugin]} />
         </Worker>
-      )}
+      )} */}
     </CSPage>
   );
 };
