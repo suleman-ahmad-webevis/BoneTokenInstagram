@@ -52,7 +52,6 @@ function InstagramHandler() {
 					fields: "instagram_business_account",
 				},
 				(response) => {
-					console.log(response);
 					resolve(response.id);
 				}
 			);
@@ -71,6 +70,7 @@ function InstagramHandler() {
 				},
 				(response) => {
 					resolve(response.id);
+					console.log(instagramAccountId, "instaaccountid");
 				}
 			);
 		});
