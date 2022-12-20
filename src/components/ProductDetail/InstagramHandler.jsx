@@ -10,6 +10,7 @@ function InstagramHandler() {
 	useEffect(() => {
 		window.FB.getLoginStatus((response) => {
 			setFacebookUserAccessToken(response.authResponse?.accessToken);
+			console.log(response, "getloginstatus");
 		});
 	}, []);
 
@@ -17,6 +18,7 @@ function InstagramHandler() {
 		window.FB.login(
 			(response) => {
 				setFacebookUserAccessToken(response.authResponse?.accessToken);
+				console.log(response, "facebookuseraccesstoken");
 			},
 			{
 				// Scopes that allow us to publish content to Instagram
@@ -38,6 +40,7 @@ function InstagramHandler() {
 				{ access_token: facebookUserAccessToken },
 				(response) => {
 					resolve(response.data);
+					console.log(response, "facebookuseraccessatoken");
 				}
 			);
 		});
@@ -53,6 +56,7 @@ function InstagramHandler() {
 				},
 				(response) => {
 					resolve(response.id);
+					console.log(response, "instagramaccountid");
 				}
 			);
 		});
@@ -70,7 +74,7 @@ function InstagramHandler() {
 				},
 				(response) => {
 					resolve(response.id);
-					console.log(instagramAccountId, "instaaccountid");
+					console.log(response, "mediaobjectcontainerid");
 				}
 			);
 		});
@@ -89,6 +93,10 @@ function InstagramHandler() {
 					creation_id: mediaObjectContainerId,
 				},
 				(response) => {
+					console.log(
+						response,
+						"publushmediaobjectcontainerresponse"
+					);
 					resolve(response.id);
 				}
 			);
