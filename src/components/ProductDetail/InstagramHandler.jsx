@@ -9,7 +9,6 @@ function InstagramHandler() {
 
 	useEffect(() => {
 		window.FB.getLoginStatus((response) => {
-			console.log(response);
 			setFacebookUserAccessToken(response.authResponse?.accessToken);
 		});
 	}, []);
