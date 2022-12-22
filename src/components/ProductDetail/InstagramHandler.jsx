@@ -22,7 +22,7 @@ function InstagramHandler() {
 			},
 			{
 				// Scopes that allow us to publish content to Instagram
-				scope: "instagram_basic,pages_show_list, public_profile, instagram_content_publish",
+				scope: "instagram_basic,pages_show_list",
 			}
 		);
 	};
