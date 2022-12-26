@@ -3,7 +3,9 @@ import axios from "axios";
 const API = axios.create({
   // baseURL: "https://btoken-backend.herokuapp.com",
   // baseURL: "http://localhost: 5000",
-  baseURL: "https://backendbt.up.railway.app",
+  // baseURL: "https://backendbt.up.railway.app",
+  baseURL: "https://web-production-5b72.up.railway.app",
+
   timeout: 20000,
   headers: {
     Accept: "*/*",
