@@ -6,6 +6,7 @@ function InstagramHandler() {
 	const [postCaption, setPostCaption] = useState("");
 	const [isSharingPost, setIsSharingPost] = useState(false);
 	const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
+	const [instagramId, setInstagramId] = useState("");
 
 	useEffect(() => {
 		window.FB.getLoginStatus((response) => {
@@ -55,8 +56,9 @@ function InstagramHandler() {
 					fields: "instagram_business_account",
 				},
 				(response) => {
-					resolve(response.instagram_business_account.id);
+					setInstagramId(response.instagram_business_account.id);
 					console.log(response, "instagramaccountid");
+					resolve(response.instagram_business_account.id);
 				}
 			);
 		});
@@ -74,6 +76,7 @@ function InstagramHandler() {
 				},
 				(response) => {
 					console.log(response, "mediaobjectcontainerid");
+
 					resolve(response.id);
 				}
 			);
@@ -146,6 +149,7 @@ function InstagramHandler() {
 			{facebookUserAccessToken ? (
 				<section className="app-section">
 					<h3>2. Send a post to Instagram</h3>
+					<h2>Instagram Account Id: {instagramId}</h2>
 					<input
 						value={imageUrl}
 						onChange={(e) => setImageUrl(e.target.value)}
