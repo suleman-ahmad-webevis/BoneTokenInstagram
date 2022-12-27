@@ -23,6 +23,8 @@ function InstagramHandler() {
 					return response.data[0].name;
 				}
 			);
+			console.log("abasdasjkdjkaksjdjka");
+
 			const instagramid = await window.FB.api(
 				facebookpage,
 				{
@@ -30,7 +32,7 @@ function InstagramHandler() {
 					fields: "instagram_business_account",
 				},
 				(response) => {
-					console.log(response);
+					console.log("response in instaaaaaaaaaaaa", response);
 					setInstagramId(response.instagram_business_account.id);
 					return;
 				}
