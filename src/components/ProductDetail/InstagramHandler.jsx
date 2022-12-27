@@ -12,18 +12,19 @@ function InstagramHandler() {
 	useEffect(() => {
 		window.FB.getLoginStatus((response) => {
 			setFacebookUserAccessToken(response.authResponse?.accessToken);
-			console.log(response, "getloginstatus");
+			return (accesstoken = response.authResponse?.accessToken);
 		})
-			.then(() => {
+			.then((accesstoken) => {
 				window.FB.api(
 					"me/accounts",
-					{ access_token: facebookUserAccessToken },
+					{ access_token: accesstoken },
 					(response) => {
 						setConnectedFacebookPage(response.data[0].name);
+						return (facebookPageId = response.data[0].name);
 					}
 				);
 			})
-			.then(() => {
+			.then((facebookPageId) => {
 				window.FB.api(
 					facebookPageId,
 					{
