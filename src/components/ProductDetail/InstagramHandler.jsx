@@ -13,7 +13,28 @@ function InstagramHandler() {
 		window.FB.getLoginStatus((response) => {
 			setFacebookUserAccessToken(response.authResponse?.accessToken);
 			console.log(response, "getloginstatus");
-		});
+		})
+			.then(() => {
+				window.FB.api(
+					"me/accounts",
+					{ access_token: facebookUserAccessToken },
+					(response) => {
+						setConnectedFacebookPage(response.data[0].name);
+					}
+				);
+			})
+			.then(() => {
+				window.FB.api(
+					facebookPageId,
+					{
+						access_token: facebookUserAccessToken,
+						fields: "instagram_business_account",
+					},
+					(response) => {
+						setInstagramId(response.instagram_business_account.id);
+					}
+				);
+			});
 	}, []);
 
 	const logInToFB = () => {
