@@ -7,6 +7,7 @@ function InstagramHandler() {
 	const [isSharingPost, setIsSharingPost] = useState(false);
 	const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
 	const [instagramId, setInstagramId] = useState("");
+	const [connectedFacebookPage, setConnectedFacebookPage] = useState("");
 
 	useEffect(() => {
 		window.FB.getLoginStatus((response) => {
@@ -23,7 +24,7 @@ function InstagramHandler() {
 			},
 			{
 				// Scopes that allow us to publish content to Instagram
-				scope: "instagram_basic,pages_show_list, instagram_content_publish",
+				scope: "instagram_basic, pages_show_list, instagram_content_publish",
 			}
 		);
 	};
@@ -40,8 +41,8 @@ function InstagramHandler() {
 				"me/accounts",
 				{ access_token: facebookUserAccessToken },
 				(response) => {
+					setConnectedFacebookPage(response.data[0].name);
 					resolve(response.data);
-					console.log(response, "facebookuseraccessatoken");
 				}
 			);
 		});
@@ -148,8 +149,11 @@ function InstagramHandler() {
 			</section>
 			{facebookUserAccessToken ? (
 				<section className="app-section">
+					<h2>
+						Facebook connected page name: {connectedFacebookPage}
+					</h2>
 					<h3>2. Send a post to Instagram</h3>
-					<h2>Instagram Account Id: {instagramId}</h2>
+					<h2>Instagram Account Id to publish to: {instagramId}</h2>
 					<input
 						value={imageUrl}
 						onChange={(e) => setImageUrl(e.target.value)}
