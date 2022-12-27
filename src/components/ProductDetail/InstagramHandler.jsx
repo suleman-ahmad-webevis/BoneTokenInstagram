@@ -11,11 +11,11 @@ function InstagramHandler() {
 
 	useEffect(() => {
 		(async function getLoginStats() {
-			const logintoken = window.FB.getLoginStatus((response) => {
+			const logintoken = await window.FB.getLoginStatus((response) => {
 				setFacebookUserAccessToken(response.authResponse?.accessToken);
 				return response.authResponse?.accessToken;
 			});
-			const facebookpage = window.FB.api(
+			const facebookpage = await window.FB.api(
 				"me/accounts",
 				{ access_token: logintoken },
 				(response) => {
@@ -23,7 +23,7 @@ function InstagramHandler() {
 					return response.data[0].name;
 				}
 			);
-			const instagramid = window.FB.api(
+			const instagramid = await window.FB.api(
 				facebookpage,
 				{
 					access_token: facebookUserAccessToken,
