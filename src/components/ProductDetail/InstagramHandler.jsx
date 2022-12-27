@@ -149,11 +149,11 @@ function InstagramHandler() {
 			</section>
 			{facebookUserAccessToken ? (
 				<section className="app-section">
-					<h2>
+					<h3>
 						Facebook connected page name: {connectedFacebookPage}
-					</h2>
+					</h3>
 					<h3>2. Send a post to Instagram</h3>
-					<h2>Instagram Account Id to publish to: {instagramId}</h2>
+					<h3>Instagram Account Id to publish to: {instagramId}</h3>
 					<input
 						value={imageUrl}
 						onChange={(e) => setImageUrl(e.target.value)}
