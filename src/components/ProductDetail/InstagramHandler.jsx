@@ -10,32 +10,30 @@ function InstagramHandler() {
 	const [connectedFacebookPage, setConnectedFacebookPage] = useState("");
 
 	useEffect(() => {
-		window.FB.getLoginStatus((response) => {
-			setFacebookUserAccessToken(response.authResponse?.accessToken);
-			return (accesstoken = response.authResponse?.accessToken);
-		})
-			.then((accesstoken) => {
-				window.FB.api(
-					"me/accounts",
-					{ access_token: accesstoken },
-					(response) => {
-						setConnectedFacebookPage(response.data[0].name);
-						return (facebookPageId = response.data[0].name);
-					}
-				);
-			})
-			.then((facebookPageId) => {
-				window.FB.api(
-					facebookPageId,
-					{
-						access_token: facebookUserAccessToken,
-						fields: "instagram_business_account",
-					},
-					(response) => {
-						setInstagramId(response.instagram_business_account.id);
-					}
-				);
+		(async function getLoginStats() {
+			const logintoken = window.FB.getLoginStatus((response) => {
+				setFacebookUserAccessToken(response.authResponse?.accessToken);
+				return response.authResponse?.accessToken;
 			});
+			const facebookpage = window.FB.api(
+				"me/accounts",
+				{ access_token: logintoken },
+				(response) => {
+					setConnectedFacebookPage(response.data[0].name);
+					return response.data[0].name;
+				}
+			);
+			const instagramid = window.FB.api(
+				facebookpage,
+				{
+					access_token: facebookUserAccessToken,
+					fields: "instagram_business_account",
+				},
+				(response) => {
+					setInstagramId(response.instagram_business_account.id);
+				}
+			);
+		})();
 	}, []);
 
 	const logInToFB = () => {
