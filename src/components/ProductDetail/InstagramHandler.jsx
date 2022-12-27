@@ -10,38 +10,35 @@ function InstagramHandler() {
 	const [connectedFacebookPage, setConnectedFacebookPage] = useState("");
 
 	useEffect(() => {
-		async function getLoginStats() {
-			const logintoken = await window.FB.getLoginStatus((response) => {
-				setFacebookUserAccessToken(response.authResponse?.accessToken);
-				return response.authResponse?.accessToken;
-			});
-			const facebookpage = await window.FB.api(
-				"me/accounts",
-				{ access_token: logintoken },
-				(response) => {
-					setConnectedFacebookPage(response.data[0].name);
-					console.log(response.data, "responseeeeeeeedata");
-					return response.data[0].id;
-				}
-			);
-
-			console.log(facebookpage, "facebookpageeeeeeeeeeeeeeeeeeeee");
-
-			const instagramid = await window.FB.api(
-				facebookpage,
-				{
-					access_token: logintoken,
-					fields: "instagram_business_account",
-				},
-				(response) => {
-					console.log(response);
-					setInstagramId(response.instagram_business_account.id);
-					return;
-				}
-			);
-		}
-		getLoginStats();
+		window.FB.getLoginStatus((response) => {
+			setFacebookUserAccessToken(response.authResponse?.accessToken);
+			console.log(response, "getloginstatus");
+		});
 	}, []);
+
+	useEffect(() => {
+		window.FB.api(
+			"me/accounts",
+			{ access_token: facebookUserAccessToken },
+			(response) => {
+				setConnectedFacebookPage(response.data[0]);
+			}
+		);
+	}, [facebookUserAccessToken]);
+
+	useEffect(() => {
+		console.log("The facebook page", connectedFacebookPage);
+		window.FB.api(
+			connectedFacebookPage?.id,
+			{
+				access_token: facebookUserAccessToken,
+				fields: "instagram_business_account",
+			},
+			(response) => {
+				setInstagramId(response.instagram_business_account.id);
+			}
+		);
+	}, [connectedFacebookPage]);
 
 	const logInToFB = () => {
 		window.FB.login(
@@ -177,7 +174,8 @@ function InstagramHandler() {
 			{facebookUserAccessToken ? (
 				<section className="app-section">
 					<h3>
-						Facebook connected page name: {connectedFacebookPage}
+						Facebook connected page name:{" "}
+						{connectedFacebookPage?.name}
 					</h3>
 					<h3>2. Send a post to Instagram</h3>
 					<h3>Instagram Account Id to publish to: {instagramId}</h3>
