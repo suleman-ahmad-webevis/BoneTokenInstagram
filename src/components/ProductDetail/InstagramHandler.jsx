@@ -29,7 +29,7 @@ function InstagramHandler() {
 			const instagramid = await window.FB.api(
 				facebookpage,
 				{
-					access_token: facebookUserAccessToken,
+					access_token: logintoken,
 					fields: "instagram_business_account",
 				},
 				(response) => {
