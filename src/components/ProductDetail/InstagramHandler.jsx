@@ -17,28 +17,34 @@ function InstagramHandler() {
 	}, []);
 
 	useEffect(() => {
-		window.FB.api(
-			"me/accounts",
-			{ access_token: facebookUserAccessToken },
-			(response) => {
-				console.log("The response", response.data[0]);
-				setConnectedFacebookPage(response.data[0]);
-			}
-		);
+		const getFacebook = async () => {
+			await window.FB.api(
+				"me/accounts",
+				{ access_token: facebookUserAccessToken },
+				(response) => {
+					console.log("The response", response.data[0]);
+					setConnectedFacebookPage(response.data[0]);
+				}
+			);
+		};
+		getFacebook();
 	}, [facebookUserAccessToken]);
 
 	useEffect(() => {
 		console.log("The facebook page", connectedFacebookPage);
-		window.FB.api(
-			connectedFacebookPage?.id,
-			{
-				access_token: facebookUserAccessToken,
-				fields: "instagram_business_account",
-			},
-			(response) => {
-				setInstagramId(response.instagram_business_account.id);
-			}
-		);
+		const getInstaAccount = async () => {
+			await window.FB.api(
+				connectedFacebookPage?.id,
+				{
+					access_token: facebookUserAccessToken,
+					fields: "instagram_business_account",
+				},
+				(response) => {
+					setInstagramId(response.instagram_business_account.id);
+				}
+			);
+		};
+		getInstaAccount();
 	}, [connectedFacebookPage]);
 
 	const logInToFB = () => {
