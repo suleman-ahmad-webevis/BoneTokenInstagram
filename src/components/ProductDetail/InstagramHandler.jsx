@@ -30,8 +30,9 @@ function InstagramHandler() {
 					fields: "instagram_business_account",
 				},
 				(response) => {
-					setInstagramId(response.instagram_business_account.id);
 					console.log(response);
+					setInstagramId(response.instagram_business_account.id);
+					return;
 				}
 			);
 		})();
