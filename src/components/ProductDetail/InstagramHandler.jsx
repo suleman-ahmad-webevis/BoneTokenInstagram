@@ -21,6 +21,7 @@ function InstagramHandler() {
 			"me/accounts",
 			{ access_token: facebookUserAccessToken },
 			(response) => {
+				console.log("The response", response);
 				setConnectedFacebookPage(response.data[0]);
 			}
 		);
