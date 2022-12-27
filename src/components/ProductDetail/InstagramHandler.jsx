@@ -10,7 +10,7 @@ function InstagramHandler() {
 	const [connectedFacebookPage, setConnectedFacebookPage] = useState("");
 
 	useEffect(() => {
-		(async function getLoginStats() {
+		async function getLoginStats() {
 			const logintoken = await window.FB.getLoginStatus((response) => {
 				setFacebookUserAccessToken(response.authResponse?.accessToken);
 				return response.authResponse?.accessToken;
@@ -25,6 +25,8 @@ function InstagramHandler() {
 				}
 			);
 
+			console.log(facebookpage);
+
 			const instagramid = await window.FB.api(
 				facebookpage,
 				{
@@ -37,7 +39,8 @@ function InstagramHandler() {
 					return;
 				}
 			);
-		})();
+		}
+		getLoginStats();
 	}, []);
 
 	const logInToFB = () => {
