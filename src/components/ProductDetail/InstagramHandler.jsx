@@ -31,6 +31,7 @@ function InstagramHandler() {
 				},
 				(response) => {
 					setInstagramId(response.instagram_business_account.id);
+					console.log(response);
 				}
 			);
 		})();
