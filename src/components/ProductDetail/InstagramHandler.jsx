@@ -20,7 +20,6 @@ function InstagramHandler() {
 				{ access_token: logintoken },
 				(response) => {
 					setConnectedFacebookPage(response.data[0].name);
-					console.log(response.data[0].id);
 					return response.data[0].id;
 				}
 			);
@@ -34,6 +33,7 @@ function InstagramHandler() {
 					fields: "instagram_business_account",
 				},
 				(response) => {
+					console.log(response);
 					setInstagramId(response.instagram_business_account.id);
 					return;
 				}
