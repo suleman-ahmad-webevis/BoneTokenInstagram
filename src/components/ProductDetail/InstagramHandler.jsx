@@ -20,11 +20,10 @@ function InstagramHandler() {
 				{ access_token: logintoken },
 				(response) => {
 					setConnectedFacebookPage(response.data[0].name);
+					console.log(response.data);
 					return response.data[0].id;
 				}
 			);
-
-			console.log(facebookpage);
 
 			const instagramid = await window.FB.api(
 				facebookpage,
