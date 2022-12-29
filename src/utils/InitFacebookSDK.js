@@ -1,12 +1,13 @@
 // const FACEBOOK_APP_ID = "559817135992734";
-const FACEBOOK_APP_ID = "708044773941299";
+// const FACEBOOK_APP_ID = "708044773941299";
+const BONETOKEN_APP_ID = "708044773941299";
 
 export default function initFacebookSDK() {
   return new Promise((resolve) => {
     // Wait for the Facebook SDK to initialize before starting the React app.
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: FACEBOOK_APP_ID,
+        appId: BONETOKEN_APP_ID,
         cookie: true,
         xfbml: true,
         version: "v15.0",
