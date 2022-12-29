@@ -10,6 +10,7 @@ const InstagramHandler = () => {
 
   useEffect(() => {
     window.FB.getLoginStatus((res) => {
+      console.log("the res in getLoginStatus", res);
       setFbUserAccessToken(res.authResponse?.accessToken);
     });
   }, []);
@@ -21,6 +22,7 @@ const InstagramHandler = () => {
           "me/account",
           { access_token: fbUserAccessToken },
           (res) => {
+            console.log("The res in getFacebook", res);
             setConnectedFBPage(res.data[0]);
           }
         );
@@ -41,6 +43,7 @@ const InstagramHandler = () => {
             fields: "instagram_business_account",
           },
           (res) => {
+            console.log("The res in getInstaAccount", res);
             setInstagramId(res.instagram_business_account.id);
           }
         );
