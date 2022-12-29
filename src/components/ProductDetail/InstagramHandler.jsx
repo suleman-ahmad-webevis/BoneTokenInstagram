@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const InstagramHandler = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -11,7 +12,15 @@ const InstagramHandler = () => {
   useEffect(() => {
     window.FB.getLoginStatus((res) => {
       console.log("the res in getLoginStatus", res);
-      setFbUserAccessToken(res.authResponse?.accessToken);
+      try {
+        if (res.status == "connected") {
+          toast.success("Connected Successfully");
+          setFbUserAccessToken(res.authResponse?.accessToken);
+        }
+      } catch (err) {
+        toast.error("Error while getting login status");
+        console.log("The error in getLoginStatus", err);
+      }
     });
   }, []);
 
@@ -27,7 +36,8 @@ const InstagramHandler = () => {
           }
         );
       } catch (err) {
-        console.log("Error", err);
+        toast.error("Error getting the facebook account");
+        console.log("Error in get Facebook", err);
       }
     };
     getFacebook();
@@ -48,6 +58,7 @@ const InstagramHandler = () => {
           }
         );
       } catch (err) {
+        toast.error("Error with getting the instagram account");
         console.log("The error while getting insta account", err);
       }
     };
@@ -74,9 +85,10 @@ const InstagramHandler = () => {
     try {
       window.FB.logout(() => {
         setFbUserAccessToken(undefined);
+        toast.success("Logout Successful");
       });
     } catch (err) {
-      console.log("The err", err);
+      console.log("The err when logout of facebook", err);
     }
   };
 
@@ -86,6 +98,7 @@ const InstagramHandler = () => {
         "me/accounts",
         { access_token: fbUserAccessToken },
         (res) => {
+          console.log("The res in getting the facebook pages", res);
           setConnectedFBPage(res.data[0].name);
           resolve(res.data);
         }
@@ -102,6 +115,7 @@ const InstagramHandler = () => {
           fields: "instagram_business_account",
         },
         (res) => {
+          console.log("The res in getting instragram account id", res);
           setInstagramId(res.instagram_business_account.id);
           resolve(res.instagram_business_account.id);
         }
@@ -146,22 +160,28 @@ const InstagramHandler = () => {
   };
 
   const shareInstagramPost = async () => {
-    setIsSharingPost(true);
-    const facebookPages = await getFacebookPages();
-    const instagramAccountId = await getInstagramAccountId(facebookPages[0].id);
-    const mediaObjectContainerId = await createMediaObjectContainer(
-      instagramAccountId
-    );
+    try {
+      setIsSharingPost(true);
+      const facebookPages = await getFacebookPages();
+      const instagramAccountId = await getInstagramAccountId(
+        facebookPages[0].id
+      );
+      const mediaObjectContainerId = await createMediaObjectContainer(
+        instagramAccountId
+      );
 
-    await publishMediaObjectContainer(
-      instagramAccountId,
-      mediaObjectContainerId
-    );
-
-    setIsSharingPost(false);
-    // Reset the form state
-    setImageUrl("");
-    setPostCaption("");
+      await publishMediaObjectContainer(
+        instagramAccountId,
+        mediaObjectContainerId
+      );
+      toast.success("Media published successfully");
+      setIsSharingPost(false);
+      // Reset the form state
+      setImageUrl("");
+      setPostCaption("");
+    } catch (err) {
+      toast.error("Error sharing post on instagram");
+    }
   };
 
   return (
