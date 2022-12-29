@@ -10,6 +10,7 @@ const InstagramHandler = () => {
   const [connectedFBPage, setConnectedFBPage] = useState("");
 
   useEffect(() => {
+    console.log("The first useEffect");
     window.FB.getLoginStatus((res) => {
       console.log("the res in getLoginStatus", res);
       try {
@@ -25,6 +26,8 @@ const InstagramHandler = () => {
   }, []);
 
   useEffect(() => {
+    console.log("The second useEffect");
+
     const getFacebook = async () => {
       try {
         await window.FB.api(
@@ -47,6 +50,8 @@ const InstagramHandler = () => {
   }, [fbUserAccessToken]);
 
   useEffect(() => {
+    console.log("The third useEffect");
+
     const getInstaAccount = async () => {
       try {
         await window.FB.api(
