@@ -107,7 +107,7 @@ const InstagramHandler = () => {
         { access_token: fbUserAccessToken },
         (res) => {
           console.log("The res in getting the facebook pages", res);
-          setConnectedFBPage(res.data[0].name);
+          setConnectedFBPage(res.data[0]);
           resolve(res.data);
         }
       );
