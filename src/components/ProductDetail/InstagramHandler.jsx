@@ -31,6 +31,9 @@ const InstagramHandler = () => {
           "me/accounts",
           { access_token: fbUserAccessToken },
           (res) => {
+            if (res.data.length) {
+              toast.success("Successfully connected to Facebook");
+            }
             console.log("The res in getFacebook", res);
             setConnectedFBPage(res.data[0]);
           }
