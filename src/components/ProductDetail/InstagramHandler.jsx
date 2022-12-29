@@ -19,7 +19,7 @@ const InstagramHandler = () => {
     const getFacebook = async () => {
       try {
         await window.FB.api(
-          "me/account",
+          "me/accounts",
           { access_token: fbUserAccessToken },
           (res) => {
             console.log("The res in getFacebook", res);
