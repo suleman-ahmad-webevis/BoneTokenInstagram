@@ -19,7 +19,7 @@ const InstagramHandler = () => {
           setFbUserAccessToken(res.authResponse?.accessToken);
         }
       } catch (err) {
-        toast.error("Error while getting login status");
+        // toast.error("Error while getting login status");
         console.log("The error in getLoginStatus", err);
       }
     });
@@ -41,7 +41,7 @@ const InstagramHandler = () => {
           }
         );
       } catch (err) {
-        toast.error("Error getting the facebook account");
+        // toast.error("Error getting the facebook account");
         console.log("Error in get Facebook", err);
       }
     };
@@ -64,7 +64,7 @@ const InstagramHandler = () => {
           }
         );
       } catch (err) {
-        toast.error("Error with getting the instagram account");
+        // toast.error("Error with getting the instagram account");
         console.log("The error while getting instagram account", err);
       }
     };
