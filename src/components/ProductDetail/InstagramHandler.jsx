@@ -27,7 +27,6 @@ const InstagramHandler = () => {
 
   useEffect(() => {
     console.log("The second useEffect");
-
     const getFacebook = async () => {
       try {
         await window.FB.api(
@@ -51,7 +50,6 @@ const InstagramHandler = () => {
 
   useEffect(() => {
     console.log("The third useEffect");
-
     const getInstaAccount = async () => {
       try {
         await window.FB.api(
@@ -67,7 +65,7 @@ const InstagramHandler = () => {
         );
       } catch (err) {
         toast.error("Error with getting the instagram account");
-        console.log("The error while getting insta account", err);
+        console.log("The error while getting instagram account", err);
       }
     };
     getInstaAccount();
@@ -123,7 +121,7 @@ const InstagramHandler = () => {
           fields: "instagram_business_account",
         },
         (res) => {
-          console.log("The res in getting instragram account id", res);
+          console.log("The res in getting instagram account id", res);
           setInstagramId(res.instagram_business_account.id);
           resolve(res.instagram_business_account.id);
         }
